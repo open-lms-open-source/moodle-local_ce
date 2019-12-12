@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/ce/db" VERSION="2019121802" COMMENT="XMLDB file for Moodle local/ce"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="local_ce_custom_element" COMMENT="Stores custom elements.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="cename" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="cetype" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="channel" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="defaulticon" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="description" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="parameters" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="requirements" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="version" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="cdnurl" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="cdnurles5" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="uq_name" TYPE="unique" FIELDS="name" COMMENT="There cannot exist more custom elements with the same name."/>
+                <KEY NAME="uq_cename" TYPE="unique" FIELDS="cename" COMMENT="There cannot exist more custom elements with the same tag."/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="names" UNIQUE="true" FIELDS="cename, name"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_ce_set" COMMENT="Stores custom element sets.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="requiredcapability" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="statuscap" UNIQUE="false" FIELDS="status, requiredcapability"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_ce_set_course" COMMENT="Stores custom element sets to course relationship.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="setid" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="setid" TYPE="foreign" FIELDS="setid" REFTABLE="local_ce_set" REFFIELDS="id"/>
+                <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="local_ce_instance" COMMENT="Stores custom element instances.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="customname" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="customelementid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="setid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="config" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="customelementid" TYPE="foreign" FIELDS="customelementid" REFTABLE="local_ce_custom_element" REFFIELDS="id"/>
+                <KEY NAME="setid" TYPE="foreign" FIELDS="setid" REFTABLE="local_ce_set" REFFIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="setelement" UNIQUE="true" FIELDS="customelementid, setid"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
