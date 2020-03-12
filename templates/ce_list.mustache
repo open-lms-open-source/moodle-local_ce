@@ -21,6 +21,16 @@
 <ul class="list-group">
     {{#ces}}
         <li class="list-group-item list-group-item-action">
+            <div style="max-width: 5rem">
+                {{#iconurl}}
+                    <div style="width: 126px; height: 126px;">
+                        <img src="{{iconurl}}" alt="{{name}}">
+                    </div>
+                {{/iconurl}}
+                {{^iconurl}}
+                    <div class="local-ce-icon-ce local-ce-icon-ce-{{defaulticon}}"></div>
+                {{/iconurl}}
+            </div>
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{name}}</h5>
                 <code>{{cename}}</code>

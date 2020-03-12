@@ -155,7 +155,6 @@ div#local-ce-dock-container {
     line-height: 1;
     z-index: 100;
     pointer-events: none;
-    opacity: 0;
 }
 
 div#local-ce-dock-wrapper {
@@ -166,3 +165,73 @@ div#local-ce-dock-wrapper {
     line-height: 0;
     transition: background 0.3s ease-out;
 }
+
+/* Icon sprites */
+.local-ce-icon-ce {
+    background:url([[pix:local_ce|basic_icons]]) no-repeat;
+    width: 126px;
+    height: 126px;
+    display: inline-block;
+    transform: scale(0.6);
+}
+
+.local-ce-icon-set {
+    background:url([[pix:local_ce|basic_icons_sets]]) no-repeat;
+    width: 126px;
+    height: 126px;
+    display: inline-block;
+    transform: scale(0.6);
+}
+
+.local-ce-icon-ce-circle {
+    background-position: -30px -30px;
+}
+
+.local-ce-icon-ce-triangle {
+    background-position: -218px -30px;
+}
+
+.local-ce-icon-ce-diamond {
+    background-position: -406px -30px;
+}
+
+.local-ce-icon-ce-square {
+    background-position: -594px -30px;
+}
+
+.local-ce-icon-ce-pentagon {
+    background-position: -782px -30px;
+}
+
+.local-ce-icon-set-cylinder {
+    background-position: -30px -30px;
+}
+
+.local-ce-icon-set-bezel-square {
+    background-position: -218px -30px;
+}
+
+.local-ce-icon-set-cube {
+    background-position: -406px -30px;
+}
+
+.local-ce-icon-set-folded-corner {
+    background-position: -594px -30px;
+}
+
+.local-ce-icon-set-document {
+    background-position: -782px -30px;
+}
+
+.local-ce-card-inner {
+    overflow: hidden;
+}
+
+.local-ce-card-inner .card-img-top {
+    transition: all 1.5s ease;
+}
+
+.local-ce-card-inner:hover .card-img-top {
+    transform: scale(1.5);
+}
+

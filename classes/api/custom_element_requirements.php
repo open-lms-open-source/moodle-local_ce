@@ -33,9 +33,13 @@ class custom_element_requirements {
 
     const SCRIPT_TYPE_MODULE = 'module';
     const SCRIPT_TYPE_DEFAULT = 'text/javascript';
+    const SCRIPT_TYPES = [self::SCRIPT_TYPE_DEFAULT, self::SCRIPT_TYPE_MODULE];
+
     const MODULE_TYPE_MODULE = 'module';
     const MODULE_TYPE_MODULE_ES5 = 'modulees5';
     const MODULE_TYPES = [self::MODULE_TYPE_MODULE, self::MODULE_TYPE_MODULE_ES5];
+
+    const MODULE_TYPES_REQUIRED = [self::MODULE_TYPE_MODULE];
 
     /**
      * @var string[]
@@ -146,13 +150,45 @@ class custom_element_requirements {
         if (!in_array($moduletype, self::MODULE_TYPES)) {
             throw new \coding_exception('Invalid module type: ' . $moduletype);
         }
-        foreach ($this->libraryconfig as $libraryconfig) {
+        $found = false;
+        foreach ($this->libraryconfig as $key => $libraryconfig) {
             if ($libraryconfig['moduletype'] === $moduletype) {
                 $libraryconfig['type'] = $type;
                 $libraryconfig['nomodule'] = $nomodule;
+                $this->libraryconfig[$key] = $libraryconfig;
+                $found = true;
                 break;
             }
         }
+
+        if (!$found) {
+            throw new \coding_exception('Module type not found: ' . $moduletype);
+        }
+    }
+
+    /**
+     * @return array
+     * @throws \coding_exception
+     */
+    public function get_libraryconfig_for_module_type($moduletype): array {
+        if (!in_array($moduletype, self::MODULE_TYPES)) {
+            throw new \coding_exception('Invalid module type: ' . $moduletype);
+        }
+
+        $res = [];
+        foreach ($this->libraryconfig as $libraryconfig) {
+            if ($libraryconfig['moduletype'] === $moduletype) {
+                $res[] = $libraryconfig['type'];
+                $res[] = $libraryconfig['nomodule'];
+                break;
+            }
+        }
+
+        if (!empty($res)) {
+            return $res;
+        }
+
+        throw new \coding_exception('Module type not found: ' . $moduletype);
     }
 
 

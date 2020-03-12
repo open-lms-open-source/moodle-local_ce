@@ -25,6 +25,11 @@
 
 namespace local_ce\model;
 
+use context_system;
+use local_ce\api\custom_element_parameters;
+use local_ce\api\custom_element_requirements;
+use moodle_url;
+
 defined ('MOODLE_INTERNAL') || die();
 
 /**
@@ -40,6 +45,14 @@ class custom_element extends abstract_model {
     const CETYPE_MANUAL = 1;
 
     const CETYPE_CHANNEL = 2;
+
+    const CE_ICON_CIRCLE = 'circle';
+    const CE_ICON_TRIANGLE = 'triangle';
+    const CE_ICON_DIAMOND = 'diamond';
+    const CE_ICON_SQUARE = 'square';
+    const CE_ICON_PENTAGON = 'pentagon';
+
+    const CE_DEFAULT_ICON = self::CE_ICON_CIRCLE;
 
     /**
      * @var string
@@ -77,7 +90,7 @@ class custom_element extends abstract_model {
     public $parameters;
 
     /**
-     * @var string
+     * @var custom_element_requirements
      */
     public $requirements;
 
@@ -107,6 +120,11 @@ class custom_element extends abstract_model {
     public $deleteurl;
 
     /**
+     * @var string
+     */
+    public $iconurl;
+
+    /**
      * custom_element constructor.
      * @param $id
      * @param $name
@@ -126,8 +144,8 @@ class custom_element extends abstract_model {
      * @param $cdnurles5
      */
     public function __construct($id, $name, $cename, $cetype, $channel, $defaulticon, $description,
-                                $parameters, $requirements, $timemodified, $version, $cdnurl,
-                                $cdnurles5) {
+                                custom_element_parameters $parameters, custom_element_requirements $requirements,
+                                $timemodified, $version, $cdnurl, $cdnurles5) {
         $this->id = $id;
         $this->name = $name;
         $this->cename = $cename;
@@ -156,6 +174,8 @@ class custom_element extends abstract_model {
                 'ceid' => $this->id
             ]);
             $this->deleteurl = $murl->out(false);
+
+            $this->iconurl = $this->get_icon_file_url();
         }
     }
 
@@ -180,8 +200,8 @@ class custom_element extends abstract_model {
         $record->channel = $this->channel;
         $record->defaulticon = $this->defaulticon;
         $record->description = $this->description;
-        $record->parameters = $this->parameters;
-        $record->requirements = $this->requirements;
+        $record->parameters = $this->parameters->to_json_string();
+        $record->requirements = $this->requirements->to_json_string();
         $record->version = $this->version;
         $record->cdnurl = $this->cdnurl;
         $record->cdnurles5 = $this->cdnurles5;
@@ -193,7 +213,41 @@ class custom_element extends abstract_model {
      * @return array
      */
     public function validate(): array {
-        return [];
+        $errors = [];
+
+        // CE name validations.
+        if (empty($this->name)) {
+            $errors['name'] = get_string('ce_form_error_name_empty', 'local_ce');
+        }
+
+        // CE cename validations.
+        if (empty($this->cename)) {
+            $errors['cename'] = get_string('ce_form_error_cename_empty', 'local_ce');
+        }
+
+        $matches = [];
+        preg_match('/[a-z]+-[a-z\\-]+/',$this->cename,$matches);
+        if (empty($matches)) {
+            $errors['cename'] = get_string('ce_form_error_cename_lettershyphens', 'local_ce');
+        }
+
+        $matches = [];
+        preg_match('/[A-Z]+/',$this->cename,$matches);
+        if (!empty($matches)) {
+            $errors['cename'] = get_string('ce_form_error_cename_nouppercase', 'local_ce');
+        }
+
+        // CE version validations.
+        if (empty($this->version)) {
+            $errors['version'] = get_string('ce_form_error_version_empty', 'local_ce');
+        }
+
+        // CE version validations.
+        if (is_int($this->version) && $this->version < 0) {
+            $errors['version'] = get_string('ce_form_error_version_notint', 'local_ce');
+        }
+
+        return $errors;
     }
 
     /**
@@ -209,12 +263,32 @@ class custom_element extends abstract_model {
             $record->channel,
             $record->defaulticon,
             $record->description,
-            $record->parameters,
-            $record->requirements,
+            custom_element_parameters::from_string($record->parameters),
+            custom_element_requirements::from_string($record->requirements),
             $record->timemodified,
             $record->version,
             $record->cdnurl,
             $record->cdnurles5
         );
+    }
+
+    /**
+     * @return string|null
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public function get_icon_file_url() {
+        $fs = get_file_storage();
+        $files = $fs->get_area_files(context_system::instance()->id, 'local_ce', 'icon', $this->id);
+        foreach ($files as $file) {
+            $filename = $file->get_filename();
+            if ('.' === $file->get_filename()) {
+                continue;
+            }
+            $url = moodle_url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon',
+                $file->get_itemid(), $file->get_filepath(), $filename)->out(false);
+            return $url;
+        }
+        return null;
     }
 }

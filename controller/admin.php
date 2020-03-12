@@ -24,6 +24,7 @@
  */
 defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
 
+use local_ce\api\custom_element_requirements;
 use local_ce\form\instance_form;
 use local_ce\model\custom_element;
 use local_ce\model\instance;
@@ -137,48 +138,54 @@ HTML;
             $ceid, $mform->get_iconfile_options());
         $toform->iconfileid = $draftitemid;
 
-        $draftitemid = file_get_submitted_draft_itemid('modulefileid');
-        file_prepare_draft_area($draftitemid, $context->id, 'local_ce', 'module',
-            $ceid, $mform->get_modulefile_options());
-        $toform->modulefileid = $draftitemid;
+        foreach (custom_element_requirements::MODULE_TYPES as $modtype) {
+            $draftitemid = file_get_submitted_draft_itemid($modtype . 'fileid');
+            file_prepare_draft_area($draftitemid, $context->id, 'local_ce', $modtype,
+                $ceid, $mform->get_modulefile_options());
+            $toform->{$modtype . 'fileid'} = $draftitemid;
+        }
 
-        $draftitemid = file_get_submitted_draft_itemid('modulefilees5id');
-        file_prepare_draft_area($draftitemid, $context->id, 'local_ce', 'modulees5',
-            $ceid, $mform->get_modulefile_options());
-        $toform->modulefilees5id = $draftitemid;
-
+        // The list of plugins will be used in several parts, preloading it here.
+        $pluginopts = $mform->get_plugin_list();
         if (!empty($ceid)) {
+            /** @var custom_element $ce */
             $ce = custom_element::get_by_id($ceid);
             $toform = (object) array_merge((array) $ce, (array) $toform);
+            $toform->parameters = $ce->parameters->to_json_string();
+            /** @var custom_element_requirements $requirements */
+            $requirements = $ce->requirements;
+            $plugins = $requirements->get_plugins();
+            $toform->requiredplugins = [];
+            foreach ($plugins as $plugin) {
+                $toform->requiredplugins[] = array_search(
+                    implode(',', [$plugin['pluginid'] , $plugin['pluginversion']]),
+                    $pluginopts);
+            }
+
+            foreach (custom_element_requirements::MODULE_TYPES as $modtype) {
+                list(
+                    $toform->{$modtype . '_script_type'},
+                    $toform->{$modtype . '_script_nomodule'},
+                ) = $requirements->get_libraryconfig_for_module_type($modtype);
+
+                $toform->{$modtype . '_script_type'} = array_search(
+                    $toform->{$modtype . '_script_type'}, custom_element_requirements::SCRIPT_TYPES);
+            }
         }
         $mform->set_data($toform);
 
         if ($fromform = $mform->get_data()) {
-            $ce = new custom_element(
-                $ceid,
-                $fromform->name,
-                $fromform->cename,
-                $fromform->cetype,
-                null,
-                $fromform->defaulticon,
-                $fromform->description,
-                $fromform->parameters,
-                $fromform->requirements,
-                null,
-                $fromform->version,
-                null,
-                null
-            );
+            $ce = $mform->create_object_from_form_data($ceid, $fromform);
 
             $ce->save();
 
             // Process form submission files.
             file_save_draft_area_files($fromform->iconfileid, $context->id, 'local_ce', 'icon',
                 $ce->id, $mform->get_iconfile_options());
-            file_save_draft_area_files($fromform->modulefileid, $context->id, 'local_ce', 'module',
-                $ce->id, $mform->get_modulefile_options());
-            file_save_draft_area_files($fromform->modulefilees5id, $context->id, 'local_ce', 'modulees5',
-                $ce->id, $mform->get_modulefile_options());
+            foreach (custom_element_requirements::MODULE_TYPES as $modtype) {
+                file_save_draft_area_files($fromform->{$modtype . 'fileid'}, $context->id, 'local_ce', $modtype,
+                    $ce->id, $mform->get_modulefile_options());
+            }
 
             $this->url->param('controller', 'admin');
             $this->url->param('action', 'listces');
@@ -289,6 +296,7 @@ HTML;
                 $setid,
                 $fromform->name,
                 $fromform->status,
+                $fromform->defaulticon,
                 $cap
             );
 

@@ -35,9 +35,9 @@ defined('MOODLE_INTERNAL') || die();
  */
 class custom_element_parameters {
 
-    public const CE_PARAM_NUMBER = 0;
-    public const CE_PARAM_BOOL = 1;
-    public const CE_PARAM_STRING = 2;
+    public const CE_PARAM_NUMBER = 'number';
+    public const CE_PARAM_BOOL = 'bool';
+    public const CE_PARAM_STRING = 'string';
 
     public const CE_VALID_PARAMS = [
         self::CE_PARAM_NUMBER,
@@ -113,10 +113,10 @@ class custom_element_parameters {
 
     /**
      * @param string $name
-     * @param int $type
+     * @param string $type
      * @throws \coding_exception
      */
-    public function add_parameter(string $name, int $type): void {
+    public function add_parameter(string $name, string $type): void {
         if (!in_array($type, self::CE_VALID_PARAMS)) {
             throw new \coding_exception('Invalid custom element parameter type detected: ' . $type);
         }
@@ -137,6 +137,6 @@ class custom_element_parameters {
                 return $parameter['type'];
             }
         }
-        throw new \coding_exception('Invalid custom element parameter name');
+        throw new \coding_exception('Invalid custom element parameter name:' . $name);
     }
 }

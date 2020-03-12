@@ -45,36 +45,6 @@ function local_ce_before_footer() {
 
     // Load components.
     $wcloader->load_components();
-
-    $currentcaps = [];
-    $capstocheck = [
-        'local/ce:learnerset_view',
-        'local/ce:instructorset_view'
-    ];
-    // Check for caps.
-    foreach ($capstocheck as $cap) {
-        if (has_capability($cap, $PAGE->context)) {
-            $currentcaps[] = $cap;
-        }
-    }
-
-    $sets = \local_ce\model\set::get_all_published_with_caps($currentcaps);
-    if (empty($sets)) {
-        return;
-    }
-
-    $setstorender = [];
-    foreach ($sets as $set) {
-        $settorender = [];
-        $settorender['name'] = $set->name;
-        $settorender['seticonurl'] = $set->get_icon_url();
-        $settorender['seturl'] = $set->get_view_url();
-
-        $setstorender[] = $settorender;
-    }
-    $PAGE->requires->js_call_amd('local_ce/setdock', 'init', [
-        'sets' => $setstorender
-    ]);
 }
 
 /**
@@ -118,5 +88,96 @@ function local_ce_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
     } else {
        return false;
     }
+}
+
+/**
+ * Adds the dock to the footer html.
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function local_ce_add_dock_to_footer() {
+    global $CFG, $OUTPUT, $PAGE;
+
+    static $added = false;
+    if (!$added) {
+        $added = true;
+    } else {
+        return;
+    }
+
+    if (empty($CFG->local_ce_enable_usage)) {
+        return;
+    }
+
+    $currentcaps = [];
+    $capstocheck = [
+        'local/ce:learnerset_view',
+        'local/ce:instructorset_view'
+    ];
+    // Check for caps.
+    foreach ($capstocheck as $cap) {
+        if (has_capability($cap, $PAGE->context)) {
+            $currentcaps[] = $cap;
+        }
+    }
+
+    $sets = \local_ce\model\set::get_all_published_with_caps($currentcaps);
+    if (empty($sets)) {
+        return;
+    }
+
+    $setstorender = [];
+    foreach ($sets as $set) {
+        $settorender = [];
+        $settorender['name'] = $set->name;
+        $settorender['seturl'] = $set->get_view_url();
+        $settorender['iconurl'] = !is_null($set->iconurl) ? $set->iconurl : $OUTPUT->image_url('set-' . $set->defaulticon, 'local_ce')->out(false);
+        $setstorender[] = (object)$settorender;
+    }
+
+    $template = $OUTPUT->render_from_template('local_ce/set_dock', (object)[
+        'sets' => $setstorender
+    ]);
+
+    if (!isset($CFG->additionalhtmlfooter)) {
+        $CFG->additionalhtmlfooter = '';
+    }
+    $CFG->additionalhtmlfooter .= $template;
+}
+
+/**
+ * Used since Moodle 29.
+ */
+function local_ce_extend_navigation() {
+    local_ce_add_dock_to_footer();
+}
+
+/**
+ * Used since Moodle 29.
+ */
+function local_ce_extend_settings_navigation() {
+    local_ce_add_dock_to_footer();
+}
+
+/**
+ * Used in Moodle 30+ when a user is logged on.
+ */
+function local_ce_extend_navigation_user_settings() {
+    local_ce_add_dock_to_footer();
+}
+
+/**
+ * Used in Moodle 30+ on the frontpage.
+ */
+function local_ce_extend_navigation_frontpage() {
+    local_ce_add_dock_to_footer();
+}
+
+/**
+ * Used in Moodle 31+ when a user is logged on.
+ */
+function local_ce_extend_navigation_user() {
+    local_ce_add_dock_to_footer();
 }
 

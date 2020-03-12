@@ -24,21 +24,35 @@
         </div>
     </div>
 </div>
-<div class="list-group">
-    {{#instances}}
-        <a class="list-group-item list-group-item-action"
-           href="{{launchurl}}">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{customname}}</h5>
-                {{#ce}}<code>{{name}}</code>{{/ce}}
+
+<div class="card-columns">
+        {{#instances}}
+            <a class="card text-center" href="{{launchurl}}">
+                <div class="local-ce-card-inner">
+                    {{#iconurl}}
+                        <img src="{{iconurl}}" class="card-img-top" alt="{{customname}}">
+                    {{/iconurl}}
+                    {{^iconurl}}
+                        {{#ce}}
+                            <div class="card-img-top">
+                                <div class="local-ce-icon-ce local-ce-icon-ce-{{defaulticon}}"></div>
+                            </div>
+                        {{/ce}}
+                    {{/iconurl}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{customname}}</h5>
+                    {{#ce}}<code class="card-text">{{name}}</code>{{/ce}}
+                </div>
+            </a>
+        {{/instances}}
+        {{^instances}}
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="mb-1">{{#str}} emptyset, local_ce {{/str}}</h5>
+                </div>
             </div>
-        </a>
-    {{/instances}}
-    {{^instances}}
-        <span class="list-group-item list-group-item-action">
-            <div class="d-flex w-100">
-                <h5 class="mb-1">{{#str}} emptyset, local_ce {{/str}}</h5>
-            </div>
-        </span>
-    {{/instances}}
+        {{/instances}}
+    </div>
 </div>
+

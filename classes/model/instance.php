@@ -77,6 +77,11 @@ class instance extends abstract_model {
     public $launchurl;
 
     /**
+     * @var string|null
+     */
+    public $iconurl;
+
+    /**
      * instance constructor.
      * @param $id
      * @param $customname
@@ -117,6 +122,8 @@ class instance extends abstract_model {
                 'instanceid' => $this->id
             ]);
             $this->launchurl = $murl->out(false);
+
+            $this->iconurl = $this->ce->get_icon_file_url();
         }
     }
 

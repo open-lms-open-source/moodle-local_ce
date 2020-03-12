@@ -45,6 +45,14 @@ class set extends abstract_model {
 
     const SET_STATUS_PUBLISHED = 2;
 
+    const SET_ICON_CYLINDER = 'cylinder';
+    const SET_ICON_BEZEL_SQUARE = 'bezel-square';
+    const SET_ICON_CUBE = 'cube';
+    const SET_ICON_FOLDED_CORNER = 'folded-corner';
+    const SET_ICON_DOCUMENT = 'document';
+
+    const SET_DEFAULT_ICON = self::SET_ICON_BEZEL_SQUARE;
+
     /**
      * @var string
      */
@@ -54,6 +62,11 @@ class set extends abstract_model {
      * @var int
      */
     public $status;
+
+    /**
+     * @var string
+     */
+    public $defaulticon;
 
     /**
      * @var string
@@ -71,17 +84,24 @@ class set extends abstract_model {
     public $deleteurl;
 
     /**
+     * @var string
+     */
+    public $iconurl;
+
+    /**
      * set constructor.
      * @param int $id
      * @param string $name
      * @param int $status
+     * @param string $defaulticon
      * @param string $requiredcapability
      * @param int $timemodified
      */
-    public function __construct($id, $name, $status, $requiredcapability = null, $timemodified = null) {
+    public function __construct($id, $name, $status, $defaulticon, $requiredcapability = null, $timemodified = null) {
         $this->id = $id;
         $this->name = $name;
         $this->status = $status;
+        $this->defaulticon = $defaulticon;
         $this->requiredcapability = $requiredcapability;
         $this->timemodified = $timemodified;
 
@@ -106,6 +126,8 @@ class set extends abstract_model {
                 'setid' => $this->id
             ]);
             $this->instancesurl = $murl->out(false);
+
+            $this->iconurl = $this->get_icon_url();
         }
 
         $this->statusstr = '';
@@ -139,6 +161,7 @@ class set extends abstract_model {
         }
         $record->name = $this->name;
         $record->status = $this->status;
+        $record->defaulticon = $this->defaulticon;
         $record->requiredcapability = $this->requiredcapability;
         $record->timemodified = $this->timemodified;
         return $record;
@@ -160,6 +183,7 @@ class set extends abstract_model {
             $record->id,
             $record->name,
             $record->status,
+            $record->defaulticon,
             $record->requiredcapability ?? null,
             $record->timemodified ?? null
         );
@@ -201,7 +225,7 @@ SQL;
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function get_icon_url() : string {
+    public function get_icon_url() {
         $fs = get_file_storage();
 
         /** @var stored_file[] $files */
@@ -209,11 +233,13 @@ SQL;
         // There should only be 1 file.
         foreach ($files as $file) {
             $mimetype = $file->get_mimetype();
-            if(file_mimetype_in_typegroup($mimetype, 'web_image')) {
+            if (file_mimetype_in_typegroup($mimetype, 'web_image')) {
                 return moodle_url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon_set',
                     $file->get_itemid(), $file->get_filepath(), $file->get_filename())->out(false);
             }
         }
+
+        return null;
     }
 
     /**

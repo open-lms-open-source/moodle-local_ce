@@ -59,9 +59,18 @@ $string['ce_form_version'] = 'Version';
 $string['ce_form_modulefile'] = 'JS Module file (ES2015)';
 $string['ce_form_module_script_type'] = 'JS Module file (ES2015) Script type';
 $string['ce_form_module_script_nomodule'] = 'Add "nomodule" attribute for the JS Module file (ES2015)';
-$string['ce_form_modulefilees5'] = 'JS Module file (ES5)';
+$string['ce_form_modulees5file'] = 'JS Module file (ES5)';
 $string['ce_form_modulees5_script_type'] = 'JS Module file (ES5) Script type';
 $string['ce_form_modulees5_script_nomodule'] = 'Add "nomodule" attribute for the JS Module file (ES5)';
+
+// Custom elements form errors.
+$string['ce_form_error_name_empty'] = 'You must specify a name';
+$string['ce_form_error_cename_empty'] = 'You must specify an Html tag';
+$string['ce_form_error_cename_lettershyphens'] = 'Html tag must be comprised of lower case letters and hyphens';
+$string['ce_form_error_cename_nouppercase'] = 'Html tag can\'t have upper case letters';
+$string['ce_form_error_version_empty'] = 'You must specify a version, and it can\'t be 0';
+$string['ce_form_error_version_notint'] = 'Version must be a positive integer';
+$string['ce_form_error_parameters_invalid'] = 'You must enter a valid JSON string or leave the field empty';
 
 // Set form.
 $string['set_form_name'] = 'Name';
@@ -69,6 +78,7 @@ $string['set_form_contextlevel'] = 'Context level';
 $string['set_form_status'] = 'Status';
 $string['set_form_requiredcapability'] = 'Required capability';
 $string['set_form_iconfile'] = 'Icon file';
+$string['set_form_defaulticon'] = 'Default icon';
 $string['nocapability'] = 'None';
 
 // Instance form.
@@ -88,3 +98,5 @@ $string['statuspublished'] = 'Published';
 
 $string['emptyset'] = 'This set is empty';
 
+// Instance form errors.
+$string['instance_form_error_config_invalid'] = 'You must enter a valid JSON string or leave the field empty';

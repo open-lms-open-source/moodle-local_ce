@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/ce/db" VERSION="2019121802" COMMENT="XMLDB file for Moodle local/ce"
+<XMLDB PATH="local/ce/db" VERSION="2019121805" COMMENT="XMLDB file for Moodle local/ce"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -33,6 +33,7 @@
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="name" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="defaulticon" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
                 <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
                 <FIELD NAME="requiredcapability" TYPE="char" LENGTH="30" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
@@ -72,7 +73,7 @@
                 <KEY NAME="setid" TYPE="foreign" FIELDS="setid" REFTABLE="local_ce_set" REFFIELDS="id"/>
             </KEYS>
             <INDEXES>
-                <INDEX NAME="setelement" UNIQUE="true" FIELDS="customelementid, setid"/>
+                <INDEX NAME="setelement" UNIQUE="false" FIELDS="customelementid, setid"/>
             </INDEXES>
         </TABLE>
     </TABLES>

@@ -29,6 +29,7 @@ defined('MOODLE_INTERNAL') || die('Forbidden.');
 
 require_once("$CFG->libdir/formslib.php");
 
+use local_ce\model\custom_element;
 use local_ce\model\set;
 use moodleform;
 
@@ -46,8 +47,10 @@ class set_form extends moodleform {
         $mform = $this->_form;
 
         // Adding the standard "name" field.
-        $mform->addElement('text', 'name', get_string('set_form_name', 'local_ce'), ['size' => '30']);
-        $mform->setType('name', PARAM_TEXT);
+        $mform->addElement('text', 'name', get_string('set_form_name', 'local_ce'), ['maxlength' => 10, 'size' => '10']);
+        $mform->setType('name', PARAM_ALPHANUM);
+        $mform->addRule('name', null, 'required');
+        $mform->addRule('name', get_string('maximumchars', '', 10), 'maxlength', 100);
 
         $statusopts = [
             set::SET_STATUS_DRAFT     => get_string('statusdraft', 'local_ce'),
@@ -64,12 +67,16 @@ class set_form extends moodleform {
 
         $capabilityopts = [
             ''                            => get_string('nocapability', 'local_ce'),
-            'local/ce:learnerset_view'    => get_string('ce:courseset_view', 'local_ce'),
-            'local/ce:instructorset_view' => get_string('ce:learnerset_view', 'local_ce'),
+            'local/ce:learnerset_view'    => get_string('ce:learnerset_view', 'local_ce'),
+            'local/ce:instructorset_view' => get_string('ce:instructorset_view', 'local_ce'),
         ];
         $mform->addElement('select', 'requiredcapability', get_string('set_form_requiredcapability', 'local_ce'),
             $capabilityopts);
         $mform->setType('requiredcapability', PARAM_TEXT);
+
+        $defaulticonoptions = $this->create_icon_options();
+        $mform->addGroup($defaulticonoptions, 'defaulticongroup', get_string('set_form_defaulticon', 'local_ce'), [' '], false);
+        $mform->setDefault('defaulticon', set::SET_DEFAULT_ICON);
 
         $iconoptions = $this->get_iconfile_options(true);
         $mform->addElement('filemanager', 'iconfileid', get_string('set_form_iconfile', 'local_ce'), null, $iconoptions);
@@ -100,6 +107,29 @@ class set_form extends moodleform {
         }
 
         return $opts;
+    }
+
+    /**
+     * @return array
+     */
+    private function create_icon_options() {
+        $mform = $this->_form;
+        $options = [
+            set::SET_ICON_CYLINDER,
+            set::SET_ICON_BEZEL_SQUARE,
+            set::SET_ICON_CUBE,
+            set::SET_ICON_FOLDED_CORNER,
+            set::SET_ICON_DOCUMENT,
+        ];
+
+        $imgoptions = [];
+
+        foreach ($options as $option) {
+            $html = "<div class=\"local-ce-icon-set local-ce-icon-set-{$option}\"></div>";
+            $imgoptions[] =& $mform->createElement('radio', 'defaulticon', '', $html, $option);
+        }
+
+        return $imgoptions;
     }
 
 }
