@@ -18,7 +18,7 @@
  * Test Custom element DAO.
  *
  * @package   local_ce
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class local_ce_custom_element_testcase
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_ce_custom_element_testcase extends advanced_testcase {

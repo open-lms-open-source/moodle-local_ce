@@ -22,7 +22,7 @@
  *
  * @package   local_ce
  * @author    David Castro
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  */
 
 namespace local_ce;
@@ -36,7 +36,7 @@ defined('MOODLE_INTERNAL') || die();
  *
  * @package   local_ce
  * @author    David Castro
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  */
 class ce_loader {
 

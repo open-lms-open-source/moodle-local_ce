@@ -18,8 +18,8 @@
  * Default controller
  *
  * @package   local_ce
- * @author    David Castro <david.castro@blackboard.com>
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @author    David Castro <david.castro@openlms.net>
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  */
 
@@ -33,8 +33,8 @@ defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
  * Default controller
  *
  * @package   local_ce
- * @author    David Castro <david.castro@blackboard.com>
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @author    David Castro <david.castro@openlms.net>
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  */
 class local_ce_controller_default extends mr_controller {
