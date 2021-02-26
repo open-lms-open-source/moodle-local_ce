@@ -18,8 +18,8 @@
  * Custom elements capability definitions.
  *
  * @package   local_ce
- * @author    David Castro <david.castro@blackboard.com>
- * @copyright Copyright (c) 2020 Blackboard Inc. (http://www.blackboard.com)
+ * @author    David Castro <david.castro@openlms.net>
+ * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
