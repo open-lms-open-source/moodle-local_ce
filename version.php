@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019121805;
-$plugin->release = '3.7.3';
-$plugin->requires = 2019052003;
+$plugin->version  = 2021060100;
+$plugin->release = '3.11.2';
+$plugin->requires = 2021051700;
 $plugin->component = 'local_ce';
 $plugin->cron = 0;
 $plugin->maturity = MATURITY_ALPHA;
