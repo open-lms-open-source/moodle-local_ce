@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2022041300;
-$plugin->release = '3.11.2';
+$plugin->version  = 2022072900;
+$plugin->release = '3.11.6';
 $plugin->requires = 2021051700;
 $plugin->component = 'local_ce';
 $plugin->cron = 0;
