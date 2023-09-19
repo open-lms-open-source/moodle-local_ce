@@ -57,7 +57,7 @@ To allow your plugin to deliver the custom element file, you'll need to add or m
 // my/plugin/lib.php
 function my_plugin_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     $pluginpath = __DIR__.'/';
-    
+  
     // ...
 
     if ($filearea === 'vendorjs') {
@@ -65,7 +65,7 @@ function my_plugin_pluginfile($course, $cm, $context, $filearea, $args, $forcedo
         send_file($path, basename($path));
         return true;
     } 
-    
+  
     // ...
 }
 ```
@@ -80,6 +80,7 @@ as a parameter in the example above.
 The following example shows how to make use of Angular to call string functions from Moodle.
 
 This is a general purpose Angular service that allows consuming any Moodle service function:
+
 ```ts
 import {Injectable} from '@angular/core';
 
@@ -407,7 +408,12 @@ Enjoy!
 
 ```
 
+## Flags
+
+### The `local_ce_enable_usage`flag.
+
 ## License
+
 Copyright (c) 2021 Open LMS (https://www.openlms.net)
 
 This program is free software: you can redistribute it and/or modify it under
@@ -420,4 +426,4 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program.  If not, see <http://www.gnu.org/licenses/>.
+this program.  If not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
