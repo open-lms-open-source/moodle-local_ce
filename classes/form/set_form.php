@@ -62,7 +62,7 @@ class set_form extends moodleform {
         $mform->addElement('course', 'courseids', get_string('courses'), [
             'multiple' => true,
             'includefrontpage' => true,
-            'noselectionstring' => get_string('allcourses', 'search')
+            'noselectionstring' => get_string('allcourses', 'search'),
         ]);
 
         $capabilityopts = [
@@ -101,7 +101,7 @@ class set_form extends moodleform {
 
         if ($forform) {
             $opts['accepted_types'] = [
-                'web_image'
+                'web_image',
             ];
             $opts['return_types'] = FILE_INTERNAL | FILE_EXTERNAL;
         }

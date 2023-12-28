@@ -164,14 +164,14 @@ class custom_element extends abstract_model {
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editce',
-                'ceid' => $this->id
+                'ceid' => $this->id,
             ]);
             $this->editurl = $murl->out(false);
 
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deletece',
-                'ceid' => $this->id
+                'ceid' => $this->id,
             ]);
             $this->deleteurl = $murl->out(false);
 

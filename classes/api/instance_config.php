@@ -106,7 +106,7 @@ class instance_config {
     public function add_parameter(string $name, $value): void {
         $this->parameters[] = [
             'name' => $name,
-            'value' => $value
+            'value' => $value,
         ];
     }
 }

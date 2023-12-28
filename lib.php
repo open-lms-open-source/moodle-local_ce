@@ -113,7 +113,7 @@ function local_ce_add_dock_to_footer() {
     $currentcaps = [];
     $capstocheck = [
         'local/ce:learnerset_view',
-        'local/ce:instructorset_view'
+        'local/ce:instructorset_view',
     ];
     // Check for caps.
     foreach ($capstocheck as $cap) {
@@ -137,7 +137,7 @@ function local_ce_add_dock_to_footer() {
     }
 
     $template = $OUTPUT->render_from_template('local_ce/set_dock', (object)[
-        'sets' => $setstorender
+        'sets' => $setstorender,
     ]);
 
     if (!isset($CFG->additionalhtmlfooter)) {

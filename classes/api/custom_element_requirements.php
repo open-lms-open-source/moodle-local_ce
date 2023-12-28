@@ -129,7 +129,7 @@ class custom_element_requirements {
     public function add_plugin(string $pluginid, string $pluginversion): void {
         $this->plugins[] = [
             'pluginid' => $pluginid,
-            'pluginversion' => $pluginversion
+            'pluginversion' => $pluginversion,
         ];
     }
 
