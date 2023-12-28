@@ -226,13 +226,13 @@ class custom_element extends abstract_model {
         }
 
         $matches = [];
-        preg_match('/[a-z]+-[a-z\\-]+/',$this->cename,$matches);
+        preg_match('/[a-z]+-[a-z\\-]+/', $this->cename, $matches);
         if (empty($matches)) {
             $errors['cename'] = get_string('ce_form_error_cename_lettershyphens', 'local_ce');
         }
 
         $matches = [];
-        preg_match('/[A-Z]+/',$this->cename,$matches);
+        preg_match('/[A-Z]+/', $this->cename, $matches);
         if (!empty($matches)) {
             $errors['cename'] = get_string('ce_form_error_cename_nouppercase', 'local_ce');
         }
