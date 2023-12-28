@@ -22,7 +22,7 @@
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  */
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
 use local_ce\api\custom_element_requirements;
 use local_ce\form\instance_form;
