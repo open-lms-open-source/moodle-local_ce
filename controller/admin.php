@@ -22,7 +22,7 @@
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://opensource.org/licenses/gpl-3.0.html GNU Public License
  */
-defined('MOODLE_INTERNAL') or die('Direct access to this script is forbidden.');
+defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
 use local_ce\api\custom_element_requirements;
 use local_ce\form\instance_form;
@@ -283,7 +283,7 @@ HTML;
             $courseidsparams = [
                 'courseids' => array_map(function($setcourse) {
                     return $setcourse->courseid;
-                }, $setcourses)
+                }, $setcourses),
             ];
 
             $mform->set_data((object)array_merge((array)$set, (array)$toform, $courseidsparams));
@@ -338,7 +338,7 @@ HTML;
         $newurl = new moodle_url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'editinstance',
-            'setid' => $setid
+            'setid' => $setid,
         ]);
 
         $saved = optional_param('saved', 0, PARAM_INT);
@@ -356,7 +356,7 @@ HTML;
                 'instances' => $instances,
                 'newurl' => $newurl->out(false),
                 'setname' => $setname,
-                'listsetsurl' => $listsetsurl
+                'listsetsurl' => $listsetsurl,
             ]);
     }
 
@@ -372,7 +372,7 @@ HTML;
         $listinstancessmurl = new moodle_url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listinstances',
-            'setid' => $setid
+            'setid' => $setid,
         ]);
         $listinstancesurl = $listinstancessmurl->out(false);
         $listinstancesstr = get_string('admin_listinstances', 'local_ce');
@@ -396,7 +396,7 @@ HTML;
         $submitparams = [
             'controller' => 'admin',
             'action' => 'editinstance',
-            'setid' => $setid
+            'setid' => $setid,
         ];
         if (!empty($instanceid)) {
             $submitparams['instanceid'] = $instanceid;
@@ -480,7 +480,7 @@ HTML;
                         'url' => $listsetsurl,
                         'label' => $listsetsstr,
                     ],
-                ]
+                ],
             ]);
     }
 }

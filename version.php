@@ -32,5 +32,5 @@ $plugin->component = 'local_ce';
 $plugin->cron = 0;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->dependencies = [
-    'local_mr' => ANY_VERSION
+    'local_mr' => ANY_VERSION,
 ];

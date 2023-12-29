@@ -109,21 +109,21 @@ class set extends abstract_model {
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editset',
-                'setid' => $this->id
+                'setid' => $this->id,
             ]);
             $this->editurl = $murl->out(false);
 
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deleteset',
-                'setid' => $this->id
+                'setid' => $this->id,
             ]);
             $this->deleteurl = $murl->out(false);
 
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'listinstances',
-                'setid' => $this->id
+                'setid' => $this->id,
             ]);
             $this->instancesurl = $murl->out(false);
 
@@ -206,7 +206,7 @@ class set extends abstract_model {
         $capquery .= ')';
 
         $params = array_merge([
-            'status' => self::SET_STATUS_PUBLISHED
+            'status' => self::SET_STATUS_PUBLISHED,
         ], $capparams);
 
         $thetable = static::get_table();

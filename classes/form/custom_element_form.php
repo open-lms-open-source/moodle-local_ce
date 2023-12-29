@@ -132,7 +132,7 @@ class custom_element_form extends moodleform {
 
         if ($forform) {
             $opts['accepted_types'] = [
-                'web_image'
+                'web_image',
             ];
             $opts['return_types'] = FILE_INTERNAL | FILE_EXTERNAL;
         }
@@ -153,7 +153,7 @@ class custom_element_form extends moodleform {
 
         if ($forform) {
             $opts['accepted_types'] = [
-                'js'
+                'js',
             ];
             $opts['return_types'] = FILE_INTERNAL | FILE_EXTERNAL;
         }
