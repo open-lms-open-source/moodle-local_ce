@@ -86,7 +86,7 @@ function local_ce_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
         // We can now send the file back to the browser - in this case with a cache lifetime of 1 day and no filtering.
         send_stored_file($file, 86400, 0, $forcedownload, $options);
     } else {
-       return false;
+        return false;
     }
 }
 
@@ -113,7 +113,7 @@ function local_ce_add_dock_to_footer() {
     $currentcaps = [];
     $capstocheck = [
         'local/ce:learnerset_view',
-        'local/ce:instructorset_view'
+        'local/ce:instructorset_view',
     ];
     // Check for caps.
     foreach ($capstocheck as $cap) {
@@ -137,7 +137,7 @@ function local_ce_add_dock_to_footer() {
     }
 
     $template = $OUTPUT->render_from_template('local_ce/set_dock', (object)[
-        'sets' => $setstorender
+        'sets' => $setstorender,
     ]);
 
     if (!isset($CFG->additionalhtmlfooter)) {

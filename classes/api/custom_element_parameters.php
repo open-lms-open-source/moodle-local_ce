@@ -42,7 +42,7 @@ class custom_element_parameters {
     public const CE_VALID_PARAMS = [
         self::CE_PARAM_NUMBER,
         self::CE_PARAM_BOOL,
-        self::CE_PARAM_STRING
+        self::CE_PARAM_STRING,
     ];
 
     /**
@@ -122,7 +122,7 @@ class custom_element_parameters {
         }
         $this->parameters[] = [
             'name' => $name,
-            'type' => $type
+            'type' => $type,
         ];
     }
 

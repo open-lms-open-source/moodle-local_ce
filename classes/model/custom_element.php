@@ -164,14 +164,14 @@ class custom_element extends abstract_model {
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editce',
-                'ceid' => $this->id
+                'ceid' => $this->id,
             ]);
             $this->editurl = $murl->out(false);
 
             $murl = new \moodle_url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deletece',
-                'ceid' => $this->id
+                'ceid' => $this->id,
             ]);
             $this->deleteurl = $murl->out(false);
 
@@ -226,13 +226,13 @@ class custom_element extends abstract_model {
         }
 
         $matches = [];
-        preg_match('/[a-z]+-[a-z\\-]+/',$this->cename,$matches);
+        preg_match('/[a-z]+-[a-z\\-]+/', $this->cename, $matches);
         if (empty($matches)) {
             $errors['cename'] = get_string('ce_form_error_cename_lettershyphens', 'local_ce');
         }
 
         $matches = [];
-        preg_match('/[A-Z]+/',$this->cename,$matches);
+        preg_match('/[A-Z]+/', $this->cename, $matches);
         if (!empty($matches)) {
             $errors['cename'] = get_string('ce_form_error_cename_nouppercase', 'local_ce');
         }
