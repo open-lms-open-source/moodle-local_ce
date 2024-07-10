@@ -89,6 +89,16 @@ class set extends abstract_model {
     public $iconurl;
 
     /**
+     * @var string
+     */
+    public $statusstr;
+
+    /**
+     * @var string
+     */
+    public $instancesurl;
+
+    /**
      * set constructor.
      * @param int $id
      * @param string $name
