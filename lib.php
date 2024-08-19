@@ -24,29 +24,6 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
-/**
- * Hook for adding things before footer.
- */
-function local_ce_before_footer() {
-    global $CFG, $PAGE;
-
-    if (!isloggedin()) {
-        return;
-    }
-
-    $wcloader = \local_ce\ce_loader::get_instance();
-
-    if (!empty(get_config('local_ce', 'enablemv'))) {
-        // Register Model viewer.
-        $wcloader->register_component('local_ce/model-viewer',
-            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/local_ce/' . 'vendorjs/model-viewer.js');
-    }
-
-    // Load components.
-    $wcloader->load_components();
-}
-
 /**
  * Serves 3rd party js files.
  *
