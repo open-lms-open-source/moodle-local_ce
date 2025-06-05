@@ -87,7 +87,7 @@ HTML;
                 continue;
             }
             $filename = $file->get_filename();
-            $src = moodle_url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'module',
+            $src = \core\url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'module',
                 $file->get_itemid(), $file->get_filepath(), $filename)->out(false);
             $wcloader->register_component('local_ce/' . $instance->ce->cename, $src, 'text/javascript');
             break; // Only 1 file can be registered per component.

@@ -54,7 +54,7 @@ if (!empty($CFG->local_ce_enable_usage) && $hassiteconfig) {
     $ADMIN->add($plugin, $settings);
 
     // Custom Elements management page.
-    $urlmanagece = new moodle_url('/local/ce/view.php', [
+    $urlmanagece = new \core\url('/local/ce/view.php', [
         'controller' => 'admin',
         'action' => 'view'
     ]);

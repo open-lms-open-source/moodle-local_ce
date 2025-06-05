@@ -26,7 +26,7 @@
 namespace local_ce\model;
 
 use context_system;
-use moodle_url;
+use \core\url;
 use stored_file;
 
 defined ('MOODLE_INTERNAL') || die();
@@ -116,21 +116,21 @@ class set extends abstract_model {
         $this->timemodified = $timemodified;
 
         if (!is_null($this->id)) {
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editset',
                 'setid' => $this->id
             ]);
             $this->editurl = $murl->out(false);
 
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deleteset',
                 'setid' => $this->id
             ]);
             $this->deleteurl = $murl->out(false);
 
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'listinstances',
                 'setid' => $this->id
@@ -244,7 +244,7 @@ SQL;
         foreach ($files as $file) {
             $mimetype = $file->get_mimetype();
             if (file_mimetype_in_typegroup($mimetype, 'web_image')) {
-                return moodle_url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon_set',
+                return url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon_set',
                     $file->get_itemid(), $file->get_filepath(), $file->get_filename())->out(false);
             }
         }
@@ -257,7 +257,7 @@ SQL;
      * @throws \core\exception\moodle_exception
      */
     public function get_view_url() : string {
-        $murl = new moodle_url('/local/ce/view.php', ['setid' => $this->id, 'action' => 'view']);
+        $murl = new url('/local/ce/view.php', ['setid' => $this->id, 'action' => 'view']);
         return $murl->out(false);
     }
 }

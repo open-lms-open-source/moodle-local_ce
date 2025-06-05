@@ -28,7 +28,7 @@ namespace local_ce\model;
 use context_system;
 use local_ce\api\custom_element_parameters;
 use local_ce\api\custom_element_requirements;
-use moodle_url;
+use \core\url;
 
 defined ('MOODLE_INTERNAL') || die();
 
@@ -161,14 +161,14 @@ class custom_element extends abstract_model {
         $this->cdnurles5 = $cdnurles5;
 
         if (!is_null($this->id)) {
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editce',
                 'ceid' => $this->id
             ]);
             $this->editurl = $murl->out(false);
 
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deletece',
                 'ceid' => $this->id
@@ -285,7 +285,7 @@ class custom_element extends abstract_model {
             if ('.' === $file->get_filename()) {
                 continue;
             }
-            $url = moodle_url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon',
+            $url = url::make_pluginfile_url($file->get_contextid(), 'local_ce', 'icon',
                 $file->get_itemid(), $file->get_filepath(), $filename)->out(false);
             return $url;
         }

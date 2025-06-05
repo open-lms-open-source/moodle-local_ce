@@ -101,7 +101,7 @@ class instance extends abstract_model {
         $this->ce = custom_element::get_by_id($this->customelementid);
 
         if (!is_null($this->id)) {
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new \core\url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'editinstance',
                 'setid' => $this->setid,
@@ -109,7 +109,7 @@ class instance extends abstract_model {
             ]);
             $this->editurl = $murl->out(false);
 
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new \core\url('/local/ce/view.php', [
                 'controller' => 'admin',
                 'action' => 'deleteinstance',
                 'setid' => $this->setid,
@@ -117,7 +117,7 @@ class instance extends abstract_model {
             ]);
             $this->deleteurl = $murl->out(false);
 
-            $murl = new \moodle_url('/local/ce/view.php', [
+            $murl = new \core\url('/local/ce/view.php', [
                 'action' => 'launch',
                 'instanceid' => $this->id
             ]);

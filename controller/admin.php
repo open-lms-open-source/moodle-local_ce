@@ -75,7 +75,7 @@ class local_ce_controller_admin extends mr_controller_admin {
     public function listces_action() {
         $this->taboutput = $this->render_ce_admin_tabs('listces');
 
-        $newurl = new moodle_url('/local/ce/view.php', [
+        $newurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'editce',
         ]);
@@ -97,7 +97,7 @@ class local_ce_controller_admin extends mr_controller_admin {
 
         $ceid = optional_param('ceid', null, PARAM_INT);
 
-        $listcesmurl = new moodle_url('/local/ce/view.php', [
+        $listcesmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listces',
         ]);
@@ -127,7 +127,7 @@ HTML;
         if (!empty($ceid)) {
             $submitparams['ceid'] = $ceid;
         }
-        $submiturl = new moodle_url('/local/ce/view.php', $submitparams);
+        $submiturl = new \core\url('/local/ce/view.php', $submitparams);
         $mform = new custom_element_form($submiturl);
 
         $context = context_system::instance();
@@ -213,7 +213,7 @@ HTML;
     public function listsets_action() {
 
         $this->taboutput = $this->render_ce_admin_tabs('listsets');
-        $newurl = new moodle_url('/local/ce/view.php', [
+        $newurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'editset',
         ]);
@@ -235,7 +235,7 @@ HTML;
 
         $setid = optional_param('setid', null, PARAM_INT);
 
-        $listsetsmurl = new moodle_url('/local/ce/view.php', [
+        $listsetsmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listsets',
         ]);
@@ -265,7 +265,7 @@ HTML;
         if (!empty($setid)) {
             $submitparams['setid'] = $setid;
         }
-        $submiturl = new moodle_url('/local/ce/view.php', $submitparams);
+        $submiturl = new \core\url('/local/ce/view.php', $submitparams);
         $mform = new set_form($submiturl);
 
         $context = $PAGE->context;
@@ -335,7 +335,7 @@ HTML;
         $this->taboutput = $this->render_ce_admin_tabs('listsets');
         $setid = required_param('setid', PARAM_INT);
 
-        $newurl = new moodle_url('/local/ce/view.php', [
+        $newurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'editinstance',
             'setid' => $setid
@@ -343,7 +343,7 @@ HTML;
 
         $saved = optional_param('saved', 0, PARAM_INT);
 
-        $listsetsmurl = new moodle_url('/local/ce/view.php', [
+        $listsetsmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listsets',
         ]);
@@ -369,7 +369,7 @@ HTML;
 
         $instanceid = optional_param('instanceid', null, PARAM_INT);
 
-        $listinstancessmurl = new moodle_url('/local/ce/view.php', [
+        $listinstancessmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listinstances',
             'setid' => $setid
@@ -401,7 +401,7 @@ HTML;
         if (!empty($instanceid)) {
             $submitparams['instanceid'] = $instanceid;
         }
-        $submiturl = new moodle_url('/local/ce/view.php', $submitparams);
+        $submiturl = new \core\url('/local/ce/view.php', $submitparams);
         $mform = new instance_form($submiturl);
 
         $context = $PAGE->context;
@@ -453,14 +453,14 @@ HTML;
 
     private function render_ce_admin_tabs($action) {
         global $OUTPUT;
-        $listcesmurl = new moodle_url('/local/ce/view.php', [
+        $listcesmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listces',
         ]);
         $listcesurl = $listcesmurl->out(false);
         $listcesstr = get_string('admin_listces', 'local_ce');
 
-        $listsetsmurl = new moodle_url('/local/ce/view.php', [
+        $listsetsmurl = new \core\url('/local/ce/view.php', [
             'controller' => 'admin',
             'action' => 'listsets',
         ]);
