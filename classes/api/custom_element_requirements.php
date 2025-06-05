@@ -144,11 +144,11 @@ class custom_element_requirements {
      * @param string $moduletype
      * @param string $type
      * @param bool $nomodule
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function set_libraryconfig(string $moduletype, string $type, bool $nomodule = false): void {
         if (!in_array($moduletype, self::MODULE_TYPES)) {
-            throw new \coding_exception('Invalid module type: ' . $moduletype);
+            throw new \core\exception\coding_exception('Invalid module type: ' . $moduletype);
         }
         $found = false;
         foreach ($this->libraryconfig as $key => $libraryconfig) {
@@ -162,17 +162,17 @@ class custom_element_requirements {
         }
 
         if (!$found) {
-            throw new \coding_exception('Module type not found: ' . $moduletype);
+            throw new \core\exception\coding_exception('Module type not found: ' . $moduletype);
         }
     }
 
     /**
      * @return array
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function get_libraryconfig_for_module_type($moduletype): array {
         if (!in_array($moduletype, self::MODULE_TYPES)) {
-            throw new \coding_exception('Invalid module type: ' . $moduletype);
+            throw new \core\exception\coding_exception('Invalid module type: ' . $moduletype);
         }
 
         $res = [];
@@ -188,7 +188,7 @@ class custom_element_requirements {
             return $res;
         }
 
-        throw new \coding_exception('Module type not found: ' . $moduletype);
+        throw new \core\exception\coding_exception('Module type not found: ' . $moduletype);
     }
 
 

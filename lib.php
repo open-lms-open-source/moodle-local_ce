@@ -69,9 +69,9 @@ function local_ce_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
 
 /**
  * Adds the dock to the footer html.
- * @throws coding_exception
+ * @throws \core\exception\coding_exception
  * @throws dml_exception
- * @throws moodle_exception
+ * @throws \core\exception\moodle_exception
  */
 function local_ce_add_dock_to_footer() {
     global $CFG, $OUTPUT, $PAGE;

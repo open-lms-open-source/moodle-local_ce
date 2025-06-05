@@ -274,7 +274,7 @@ class custom_element extends abstract_model {
 
     /**
      * @return string|null
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      * @throws \dml_exception
      */
     public function get_icon_file_url() {

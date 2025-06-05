@@ -101,7 +101,7 @@ class instance_config {
     /**
      * @param string $name
      * @param $value
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function add_parameter(string $name, $value): void {
         $this->parameters[] = [

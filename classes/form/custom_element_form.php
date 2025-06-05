@@ -190,7 +190,7 @@ class custom_element_form extends moodleform {
      * @param null|int $id
      * @param \stdClass $fromform
      * @return custom_element
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function create_object_from_form_data($id, $fromform): custom_element {
         $requirements = new custom_element_requirements();

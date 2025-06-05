@@ -114,11 +114,11 @@ class custom_element_parameters {
     /**
      * @param string $name
      * @param string $type
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function add_parameter(string $name, string $type): void {
         if (!in_array($type, self::CE_VALID_PARAMS)) {
-            throw new \coding_exception('Invalid custom element parameter type detected: ' . $type);
+            throw new \core\exception\coding_exception('Invalid custom element parameter type detected: ' . $type);
         }
         $this->parameters[] = [
             'name' => $name,
@@ -129,7 +129,7 @@ class custom_element_parameters {
     /**
      * @param string $name
      * @return int
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      */
     public function get_parameter_type(string $name): int {
         foreach ($this->parameters as $parameter) {
@@ -137,6 +137,6 @@ class custom_element_parameters {
                 return $parameter['type'];
             }
         }
-        throw new \coding_exception('Invalid custom element parameter name:' . $name);
+        throw new \core\exception\coding_exception('Invalid custom element parameter name:' . $name);
     }
 }

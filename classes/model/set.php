@@ -149,7 +149,7 @@ class set extends abstract_model {
                 $this->statusstr = get_string('statuspublished', 'local_ce');
                 break;
             default:
-                throw new \coding_exception('$statusid is invalid.');
+                throw new \core\exception\coding_exception('$statusid is invalid.');
                 break;
         }
     }
@@ -232,7 +232,7 @@ SQL;
 
     /**
      * @return string
-     * @throws \coding_exception
+     * @throws \core\exception\coding_exception
      * @throws \dml_exception
      */
     public function get_icon_url() {
@@ -254,7 +254,7 @@ SQL;
 
     /**
      * @return string
-     * @throws \moodle_exception
+     * @throws \core\exception\moodle_exception
      */
     public function get_view_url() : string {
         $murl = new moodle_url('/local/ce/view.php', ['setid' => $this->id, 'action' => 'view']);
