@@ -33,22 +33,22 @@ if (!empty($CFG->local_ce_enable_usage) && $hassiteconfig) {
         'localplugins',
         new admin_category(
             $plugin,
-            new lang_string('pluginname', $plugin)
+            new \core\lang_string('pluginname', $plugin)
         )
     );
 
-    $settings = new admin_settingpage('local_ce_main', new lang_string('globalsettings', $plugin));
+    $settings = new admin_settingpage('local_ce_main', new \core\lang_string('globalsettings', $plugin));
 
     // Distribution channels.
     $settings->add(new admin_setting_configtextarea("{$plugin}/channels",
-        new lang_string('channels', $plugin),
-        new lang_string('channels_desc', $plugin),
+        new \core\lang_string('channels', $plugin),
+        new \core\lang_string('channels_desc', $plugin),
         ''));
 
     // Model viewer enabling.
     $settings->add(new admin_setting_configcheckbox("{$plugin}/enablemv",
-        new lang_string('enablemv', $plugin),
-        new lang_string('enablemv_desc', $plugin),
+        new \core\lang_string('enablemv', $plugin),
+        new \core\lang_string('enablemv_desc', $plugin),
         '0'));
 
     $ADMIN->add($plugin, $settings);
@@ -59,7 +59,7 @@ if (!empty($CFG->local_ce_enable_usage) && $hassiteconfig) {
         'action' => 'view'
     ]);
     $ADMIN->add($plugin, new admin_externalpage('adminpage_view',
-        new lang_string('adminpageheading', $plugin),
+        new \core\lang_string('adminpageheading', $plugin),
         $urlmanagece->out()
     ));
 }
