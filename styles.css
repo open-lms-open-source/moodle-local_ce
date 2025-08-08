@@ -1,7 +1,7 @@
 #local_ce_loader {
     width: 100%;
     height: 10em;
-    background:url([[pix:local_ce|3dolms]]) no-repeat top center;
+    background: url([[pix:local_ce|3dolms]]) no-repeat top center;
     display: inline-block;
 }
 
@@ -14,8 +14,8 @@ div.local-ce-dock-cap {
 
 div.local-ce-dock-cap.local-ce-dock-left {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0;
+    left: 0;
 }
 
 .local-ce-dock-left {
@@ -25,8 +25,8 @@ div.local-ce-dock-cap.local-ce-dock-left {
 div.local-ce-dock-cap.right {
     background-position: right bottom;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 }
 
 ul.local-ce-dock {
@@ -52,14 +52,14 @@ ul.local-ce-dock li {
     -ms-transition: 0.15s linear;
     transition: 0.15s linear;
 
-    -webkit-transition-property: -webkit-transform margin;
-    -moz-transition-property: -moz-transform margin;
-    -o-transition-property: -o-transform margin;
-    -ms-transition-property: -ms-transform margin;
-    transition-property: transform margin;
+    -webkit-transition-property: -webkit-transform, margin;
+    -moz-transition-property: -moz-transform, margin;
+    -o-transition-property: -o-transform, margin;
+    -ms-transition-property: -ms-transform, margin;
+    transition-property: transform, margin;
     text-align: center;
 
-    pointer-events:auto;
+    pointer-events: auto;
 }
 
 ul.local-ce-dock li a {
@@ -73,13 +73,21 @@ ul.local-ce-dock li a {
     -ms-transition: 0.15s linear;
     transition: 0.15s linear;
 
-    -webkit-transition-property: -webkit-transform margin;
-    -moz-transition-property: -moz-transform margin;
-    -o-transition-property: -o-transform margin;
-    -ms-transition-property: -ms-transform margin;
-    transition-property: transform margin;
+    -webkit-transition-property: -webkit-transform, margin;
+    -moz-transition-property: -moz-transform, margin;
+    -o-transition-property: -o-transform, margin;
+    -ms-transition-property: -ms-transform, margin;
+    transition-property: transform, margin;
     margin: 0;
-    -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.45, transparent), to(rgba(255, 255, 255, 0.25)));
+    -webkit-box-reflect:
+        below 2px -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(transparent),
+            color-stop(0.45, transparent),
+            to(rgba(255, 255, 255, 0.25))
+        );
 }
 
 ul.local-ce-dock li a img {
@@ -127,7 +135,13 @@ ul.local-ce-dock li.nearby a {
 }
 
 ul.local-ce-dock li span {
-    background: rgba(0,0,0,0.75);
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.75
+        );
     position: absolute;
     bottom: 80px;
     margin: 0 auto;
@@ -161,14 +175,20 @@ div#local-ce-dock-wrapper {
     width: auto;
     display: inline-block;
     position: relative;
-    border-bottom: solid 2px rgba(255,255,255,.35);
+    border-bottom:
+        solid 2px rgba(
+            255,
+            255,
+            255,
+            .35
+        );
     line-height: 0;
     transition: background 0.3s ease-out;
 }
 
 /* Icon sprites */
 .local-ce-icon-ce {
-    background:url([[pix:local_ce|basic_icons]]) no-repeat;
+    background: url([[pix:local_ce|basic_icons]]) no-repeat;
     width: 126px;
     height: 126px;
     display: inline-block;
@@ -176,7 +196,7 @@ div#local-ce-dock-wrapper {
 }
 
 .local-ce-icon-set {
-    background:url([[pix:local_ce|basic_icons_sets]]) no-repeat;
+    background: url([[pix:local_ce|basic_icons_sets]]) no-repeat;
     width: 126px;
     height: 126px;
     display: inline-block;
