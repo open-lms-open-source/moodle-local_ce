@@ -21,19 +21,18 @@
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+namespace local_ce;
 
 use local_ce\model\custom_element;
 use local_ce\model\instance;
 use local_ce\model\set;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class local_instance_custom_element_testcase
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class local_instance_custom_element_testcase extends advanced_testcase {
+class instance_test extends \advanced_testcase {
 
     public function setUp(): void {
         $this->resetAfterTest();

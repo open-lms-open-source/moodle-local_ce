@@ -21,17 +21,16 @@
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+namespace local_ce;
 
 use local_ce\model\set;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class local_ce_set_testcase
  * @copyright Copyright (c) 2020 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class local_ce_set_testcase extends advanced_testcase {
+class set_test extends \advanced_testcase {
 
     public function setUp(): void {
         $this->resetAfterTest();
