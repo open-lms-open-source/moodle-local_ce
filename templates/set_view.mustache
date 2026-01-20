@@ -1,0 +1,58 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_ce/set_view
+}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex w-100">
+            <h2>{{#set}}{{name}}{{/set}}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="card-columns">
+        {{#instances}}
+            <a class="card text-center" href="{{launchurl}}">
+                <div class="local-ce-card-inner">
+                    {{#iconurl}}
+                        <img src="{{iconurl}}" class="card-img-top" alt="{{customname}}">
+                    {{/iconurl}}
+                    {{^iconurl}}
+                        {{#ce}}
+                            <div class="card-img-top">
+                                <div class="local-ce-icon-ce local-ce-icon-ce-{{defaulticon}}"></div>
+                            </div>
+                        {{/ce}}
+                    {{/iconurl}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{customname}}</h5>
+                    {{#ce}}<code class="card-text">{{name}}</code>{{/ce}}
+                </div>
+            </a>
+        {{/instances}}
+        {{^instances}}
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="mb-1">{{#str}} emptyset, local_ce {{/str}}</h5>
+                </div>
+            </div>
+        {{/instances}}
+    </div>
+</div>
+
